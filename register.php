@@ -2,6 +2,8 @@
 
 include 'config.php';
 
+error_reporting(0);
+
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -15,7 +17,9 @@ if (isset($_POST['submit'])) {
 
         $result = mysqli_query($conn, $sql);
         if (!$result) {
-            echo "<script> alert ('oops! Something wrong went.')</script>"; 
+            echo "<script> alert ('Wow! User Registration Completed.')</script>"; 
+        }else{
+            echo "<script> alert ('oops! Something wrong went.')</script>";  
         }
 
     } else {
@@ -49,20 +53,20 @@ if (isset($_POST['submit'])) {
         <form action = "" method = "POST" class= "login-email">
             <p class= "login-text" style="font-size: 2rem; font-weight: 800;"> Register </p>
             <div class=input-group>
-                <input type="text" placeholder= "Username" name="username"  required >
+                <input type="text" placeholder= "Username" name="username"  value= "<?php echo $username; ?>" required >
                 
 </div>
 <div class=input-group>
-                <input type="email" placeholder= "Email" name= "email" required >
+                <input type="email" placeholder= "Email" name= "email" value= "<?php echo $email; ?>" required >
                 
 </div>
 
 
 <div class="input-group">
-    <input type="password" placeholder="Password" name= "password" requird>
+    <input type="password" placeholder="Password" name= "password" value= "<?php echo ($_POST['password']); ?>" requird>
 </div>
 <div class="input-group">
-    <input type="password" placeholder="Confirm Password" name ="cpassword" requird>
+    <input type="password" placeholder="Confirm Password" name ="cpassword" value= "<?php echo ($_POST['cpassword']); ?>" requird>
 </div>
 
 
