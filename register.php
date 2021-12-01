@@ -1,3 +1,35 @@
+<?php 
+
+include 'config.php';
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = md5 ($_POST['password']);
+    $cpassword = md5($_POST['cpassword']);
+
+
+    if ($password == $cpassword) {
+        $sql = "INSERT INTO users(username, email, password)
+        VALUES ('$username',  '$email', '$password', '$cpassword')";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            echo "<script> alert ('oops! Something wrong went.')</script>"; 
+        }
+
+    } else {
+        echo "<script> alert ('Password Not Matched.')</script>";
+    }
+
+
+}
+
+
+?>
+
+
+
 <!DOCTYPE html> 
 <html>
 <head>
@@ -14,7 +46,7 @@
 
 <body>
     <div class="container">
-        <form class= "login-email">
+        <form action = "" method = "POST" class= "login-email">
             <p class= "login-text" style="font-size: 2rem; font-weight: 800;"> Register </p>
             <div class=input-group>
                 <input type="text" placeholder= "Username" name="username"  required >
@@ -35,7 +67,7 @@
 
 
 <div class = "input-group">
-    <button class ="btn"> Register </button> 
+    <button name = "submit" class ="btn"> Register </button> 
     
 </div>
 
